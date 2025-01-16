@@ -1,0 +1,55 @@
+.container {
+    width: 100vw;
+    height: 100vh;
+    background-color: white; /* Or any background you prefer */
+    overflow: hidden;
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    justify-content: space-between; /* Space items to the top and bottom */
+    align-items: center; /* Center items horizontally */
+    padding: env(safe-area-inset-top) 20px env(safe-area-inset-bottom); /* Safe area for Apple devices */
+}
+
+
+.frame {
+    margin-top: 166px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.title {
+    margin-top: 0; 
+    text-align: center; 
+    
+}
+
+p{
+    margin-top: 5px ;
+    color: blue;
+    
+}
+
+
+
+.startButton {
+    margin-top: 100px;
+    background-color: #d1d1d1;
+    color: black;
+    font-size: 1rem;
+    border:none;
+    border-radius: 8px;
+    cursor: pointer;
+   
+  }
+  
+
+  
+ 
+  
+
+.team {
+    margin-bottom: 30px; /* Remove unnecessary margin */
+    text-align: center; 
+}
