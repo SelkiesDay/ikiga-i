@@ -377,6 +377,8 @@ const questions = {
           {/* Overlay */}
       <div className={`overlay ${isModalOpen ? '' : 'hidden'}`} onClick={closeModal}></div>
 
+      <div className={`overlay ${isModalOpen ? '' : 'hidden'}`} onClick={closeModal}></div>
+
 {/* Modal */}
 {isModalOpen && modal && (
   <div className={styles.modal}>

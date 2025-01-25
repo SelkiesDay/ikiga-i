@@ -27,10 +27,12 @@ export default function IkigaiMap() {
   const [circleInput, setCircleInput] = useState(
     storedData ?? {
       title: 'Create your ikigai map', // Add default title
-      data: {'What you love': { passion: '', mission: '', conclusion: '' },
-      'What the world needs': { mission: '', vocation: '', conclusion: '' },
-      'What you are good at': { passion: '', profession: '', conclusion: '' },
-      'What you can be paid for': { vocation: '', profession: '', conclusion: '' }},
+      data: {
+        'What you love': { passion: '', mission: '', conclusion: '' },
+        'What the world needs': { mission: '', vocation: '', conclusion: '' },
+        'What you are good at': { passion: '', profession: '', conclusion: '' },
+        'What you can be paid for': { vocation: '', profession: '', conclusion: '' }
+      },
     }
   );
 
@@ -73,15 +75,26 @@ export default function IkigaiMap() {
   };
 
   // Handle user input
-   const handleText = (section, subsection, text) => {
+  const handleText = (section, subsection, text) => {
     setCircleInput((previousState) => ({
-      ...previousState, [section]: { ...previousState[section], [subsection]: text },}));
+      ...previousState,
+      data: {
+        ...previousState.data,
+        [section]: { ...previousState.data[section], [subsection]: text },
+      },
+    }));
   };
-    
 
   // Handle conclusion input
   const handleConclusion = (section, text) => {
-    setCircleInput((previousState) => ({...previousState, [section]: { ...previousState[section], conclusion: text },}));};
+    setCircleInput((previousState) => ({
+      ...previousState,
+      data: {
+        ...previousState.data,
+        [section]: { ...previousState.data[section], conclusion: text },
+      },
+    }));
+  };
 
   const openModal = (section) => {
     setModal(section);
@@ -101,32 +114,26 @@ export default function IkigaiMap() {
       circle.conclusion.trim()
   );
 
-
   // Handle Complete button
-    // Handle Complete button
   const handleComplete = () => {
     setCompleted(true); // Mark as completed
     const updatedTitle = 'My Ikigai Map'; // New title
     setTitle(updatedTitle); // Update the title in state
-  
+
     // Update local storage with the new title
-    setCircleInput((previousState) => ({
-      ...previousState,
-      data: {
-        ...previousState.data,
-        [section]: {
-          ...previousState.data[section],
-          [subsection]: text,
-        },
-      },
-    }));
-  
+    setCircleInput((previousState) => {
+      const updatedState = { ...previousState, title: updatedTitle };
+      localStorage.setItem('ikigaiMapData', JSON.stringify(updatedState));
+      return updatedState;
+    });
+
     localStorage.setItem('ikigaiMapTitle', 'My Ikigai Map');
     closeModal(); // Close the modal
   };
     
    return (
      <div className={styles.main_container}>
+      
       <div className={styles.left_branch}>
         <svg width="242" height="120" viewBox="0 0 199 77" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M1.01896 69C4.01896 70.3333 13.519 72.2 27.519 69C45.019 65 52.519 64 58.519 61C64.519 59 95.519 31.5 108.019 31.5C103.519 27.5 105.519 22 110.519 19C112.519 23 112.519 29.5 109.519 31.5C114.519 30 128.019 23.5 131.019 23.5C129.019 20.5 129.519 17 134.519 15C135.019 20 135.519 21.5 132.519 23.5C137.319 22.7 142.186 21.1667 144.019 20.5C141.686 19.6667 138.219 16 143.019 8C146.019 12.5 148.019 15 146.019 19C148.019 18 153.519 15 153.519 13C152.019 10 153.019 3 157.519 1C160.019 8 160.019 11.5 154.519 13.5C150.019 18.5 150.019 18.5 146.019 21C149.519 21.5 157.519 24 162.519 19.5C163.519 14 165.019 11.5 170.019 11C171.019 14.5 169.519 20.5 163.519 20C161.519 21 161.019 21 161.019 21.5C161.019 22 168.519 21 168.519 27C161.019 27.5 160.019 26.5 159.519 21.5C157.919 22.3 152.186 22.5 149.519 22.5C152.519 22.5 158.619 24.5 159.019 32.5C155.019 31.5 150.019 29.5 148.519 23.5C146.019 22.5 140.019 23 138.519 24.5C141.019 25 146.019 29 146.019 34C142.519 33.5 136.519 30.5 136.519 25.5C132.019 25.5 127.019 25 119.019 31.5C122.019 32.5 136.519 38.5 148.019 40C159.519 39.5 175.519 34.5 182.019 29C182.519 24.5 185.519 21.5 192.019 21.5C191.019 29 186.019 30.5 181.519 30C178.019 32.5 164.019 40 161.019 40C162.519 40.5 186.019 38 189.019 35.5C190.019 31.5 193.019 29.5 198.019 33C195.519 36.5 196.019 36.3481 189.019 37C184.619 36.6 182.519 38.1667 182.019 39C185.019 38.8333 190.819 40.4 190.019 48C184.019 47 182.019 45 181.019 39C176.019 38.6556 168.019 40.5 167.519 41C167.019 41.5 178.019 41 177.019 51.5C170.019 51 165.519 44.2196 166.019 42C162.519 41 155.019 40.5 150.519 42C146.519 42 146.019 43 116.019 34.5C108.019 33.5 95.519 35.5 81.019 51.5C84.019 52 101.519 63 111.519 52C110.519 46.5 108.519 42.5 117.019 39C117.89 46.8419 116.104 49.749 113.977 51.0288C116.578 50.2197 122.3 48.8203 125.019 49.5C128.019 46.5 136.519 46 141.019 52C134.019 55 130.519 55.5 124.519 50.5C117.019 50.2077 117.019 50.5 104.519 58C105.019 59 116.019 60 117.519 58.5C120.019 57.5 123.519 54.5 127.519 65C118.019 64 118.019 61.5 117.019 60C115.519 60 115.019 59 108.519 60C110.519 62.5 115.019 66 111.519 73.5C106.019 71 105.019 65 106.019 60C99.519 60 90.019 58.5 83.019 54.5C78.019 54 76.519 53 68.519 60C58.519 67.5 46.019 70 23.019 73.5C4.61896 76.3 0.685629 76 1.01896 75.5V69Z" fill="#5591DF" fillOpacity="0.5"/>
@@ -148,8 +155,8 @@ export default function IkigaiMap() {
           <path d="M211 55C193.667 62.3333 150 70.5 114 44.5C106.5 41.5 104 41.5 96.5 42C81 35 85.5 22.5 62 20C55.5 18.5 51.5 16.5 50.5 12.5C52.5 18 58.5118 21.5 69 24C87 36 75.5 39.5 93 47C92 53 84 57.5 77.5 58.5C72 57 68 54.5 62 44.5C57.5 36 38.5 41 36.5 38C33.3 38 22.8333 26.6667 18 21C21.8333 26.3333 30.9 37.5 36.5 39.5C44.5 44.5 57 34.5 66 58.5C59 63 55.5 69.5 50.5 69C44.5 67.5 46 59.5 43 58.5C40 57.5 28.5 58 25 53C29 57 30 58 39 59.5C44 61.5 41 74 53.5 71C56.5 70 65 60 72 62.5C77.5 65 84 68 104 53C126.5 55 124 67 144.5 69C162.5 72.5 183.5 71.5 211 66.5C211 58.5 211 55.5 211 55ZM52.5 12.5C51.6667 10 51.4 4.7 57 3.5C57.5 9 55.5 12 53.5 12.5C51.9 12.9 52.1667 12.6667 52.5 12.5ZM49.5 13.5C48.3333 10.3333 43.7 5.4 34.5 11C45 17 48 17 49.5 13.5ZM50.5 8C50.5 5.83333 49.1 1.4 43.5 1C44.5 6.5 46.5 7 50.5 8ZM26.5 51.5C25.6667 49.8333 25.5 46.3 31.5 45.5C30.5 51.5 29 51.5 26.5 51.5ZM25 48.5C25.8333 46 25.8 40.7 19 39.5C21.5 48.5 23.5 47.5 25 48.5ZM22.5 54C21.1667 50.1667 16.6 44.3 9 51.5C18 56.5 21 55 22.5 54ZM19 18.5C17.8333 17 16.2 13.4 19 11C21.5 12.5 22.5 15.5 19 18.5ZM15 17C15 13 12.2 6 1 10C3 12 8 19 15 17ZM17 23C15.6667 20.8333 11.3 17.4 4.5 21C10.5 25 14 27 17 23Z" stroke="#5591DF" strokeOpacity="0.7"/>
         </svg>
       </div>
-      <div className={styles.title}>
-        <h1>{title}</h1>
+       <div className={styles.title}>
+        <h1>{title}</h1> {/* Display the title */}
       </div>
        <div className={styles.ikigai_map}>
         <div className={styles.circles}>
@@ -392,27 +399,13 @@ export default function IkigaiMap() {
           </svg>
         </div>
         </div>
-        {/* <div className={styles.edit}>
-        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="27"  fill="none" stroke="currentColor" >
-          <path stroke="#5591DF" strokeWidth="1.5"  d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
-        </svg>
-        </div> */}
-        {/* <div className={styles.change_page}> */}
-          {/* <div className="previous">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none"  width="25" height="27"  >
-              <path stroke="#5591DF" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"  d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />
-            </svg>
-          </div> */}
           <div className="next" style={{ display: "flex", alignItems: "center", gap: "8px", color: "#1057B2" }}>next 
             <svg xmlns="http://www.w3.org/2000/svg" fill="none"  width="25" height="27" >
               <path stroke="#5591DF" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"  d="m15 15 6-6m0 0-6-6m6 6H9a6 6 0 0 0 0 12h3" onClick={() => navigate("/explore")}/>
             </svg>
           </div>
-        {/* </div> */}
-        
-         {/* Modal Rendering */}
-      <div className={`overlay ${isModalOpen ? '' : 'hidden'}`} onClick={closeModal}></div>
-      {isModalOpen && modal && (
+          
+        {isModalOpen && modal && (
         <div className={styles.modal}>
           <h2>{modal}</h2>
           <div>
@@ -424,7 +417,7 @@ export default function IkigaiMap() {
                     <input
                       type="text"
                       onChange={(e) => handleText(modal, subsection, e.target.value)}
-                      value={circleInput.data?.[modal]?.[subsection] || ''}  // Safe access with fallback
+                      value={circleInput.data?.[modal]?.[subsection] || ''} // Safe access with fallback
                     />
                   </div>
                 )
@@ -433,7 +426,7 @@ export default function IkigaiMap() {
             <input
               type="text"
               onChange={(e) => handleConclusion(modal, e.target.value)}
-              value={circleInput[modal].conclusion}
+              value={circleInput.data?.[modal]?.conclusion || ''}
             />
           </div>
           <div className={styles.modal_footer}>
@@ -454,9 +447,8 @@ export default function IkigaiMap() {
               Switch Circle
             </button>
             {allCirclesComplete && (
-              <button className={styles.complete_button} onClick={handleComplete}>
-                Complete
-              </button>
+              <button className={styles.complete_button} onClick={handleComplete}> Complete
+</button>
             )}
           </div>
           <div className={styles.close_button}>

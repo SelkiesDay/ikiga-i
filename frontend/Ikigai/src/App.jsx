@@ -10,9 +10,8 @@ import Congratulations from './components/Congratulations/Congratulations.jsx';
 import IkigaiMap from './components/IkigaiMap/IkigaiMap.jsx';
 import Inspirations from './components/Inspirations/Inspirations.jsx'
 import About from "./components/About/About.jsx";
-import Me from './components/About/About.jsx';
-import Settings
-from "./components/Settings/Settings.jsx";
+import Me from './components/Me/Me.jsx';
+import Settings from "./components/Settings/Settings.jsx";
 
 function App() {
   return (
