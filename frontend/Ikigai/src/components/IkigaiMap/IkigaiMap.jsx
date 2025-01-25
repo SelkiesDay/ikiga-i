@@ -447,9 +447,8 @@ export default function IkigaiMap() {
               Switch Circle
             </button>
             {allCirclesComplete && (
-              <button className={styles.complete_button} onClick={handleComplete}> Complete
-</button>
-            )}
+        <button onClick={handleComplete}>Complete</button>
+      )}
           </div>
           <div className={styles.close_button}>
             <svg
