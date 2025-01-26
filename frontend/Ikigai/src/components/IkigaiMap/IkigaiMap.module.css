@@ -161,7 +161,7 @@
   }
   
   .circles {
-    animation: circles 1.67s ease-in-out 3; /* 3 pulses in 5 seconds */
+    animation: circles 1.67s ease-in-out 1; /* 3 pulses in 5 seconds */
     animation-fill-mode: forwards; /* Retain the final state */
   }
 
@@ -178,6 +178,6 @@
   }
   
   .upper_text {
-    animation:upper_text 1.67s ease-in-out 3; /* 3 pulses in 5 seconds */
+    animation:upper_text 1.67s ease-in-out 2; /* 3 pulses in 5 seconds */
     animation-fill-mode: forwards; /* Retain the final state */
   }

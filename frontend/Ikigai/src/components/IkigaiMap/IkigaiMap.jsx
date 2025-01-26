@@ -31,7 +31,7 @@ export default function IkigaiMap() {
         'What you love': { passion: '', mission: '', conclusion: '' },
         'What the world needs': { mission: '', vocation: '', conclusion: '' },
         'What you are good at': { passion: '', profession: '', conclusion: '' },
-        'What you can be paid for': { vocation: '', profession: '', conclusion: '' }
+        'What you can be paid for': { vocation: '', profession: '', conclusion: '' },
       },
     }
   );
@@ -75,16 +75,12 @@ export default function IkigaiMap() {
   };
 
   // Handle user input
-  const handleText = (section, subsection, text) => {
-    setCircleInput((previousState) => ({
-      ...previousState,
-      data: {
-        ...previousState.data,
-        [section]: { ...previousState.data[section], [subsection]: text },
-      },
-    }));
-  };
-
+    // Handle user input
+    const handleText = (section, subsection, text) => {
+      setCircleInput((previousState) => ({
+        ...previousState, [section]: { ...previousState[section], [subsection]: text },}));
+    };
+      
   // Handle conclusion input
   const handleConclusion = (section, text) => {
     setCircleInput((previousState) => ({
@@ -121,11 +117,16 @@ export default function IkigaiMap() {
     setTitle(updatedTitle); // Update the title in state
 
     // Update local storage with the new title
-    setCircleInput((previousState) => {
-      const updatedState = { ...previousState, title: updatedTitle };
-      localStorage.setItem('ikigaiMapData', JSON.stringify(updatedState));
-      return updatedState;
-    });
+    setCircleInput((previousState) => ({
+  ...previousState,
+  data: {
+    ...previousState.data,
+    [section]: {
+      ...previousState.data[section],
+      [subsection]: text,
+    },
+  },
+}));
 
     localStorage.setItem('ikigaiMapTitle', 'My Ikigai Map');
     closeModal(); // Close the modal
@@ -445,10 +446,12 @@ export default function IkigaiMap() {
               }}
             >
               Switch Circle
-            </button>
+              </button>
             {allCirclesComplete && (
-        <button onClick={handleComplete}>Complete</button>
-      )}
+              <button className={styles.complete_button} onClick={handleComplete}>
+                Complete
+              </button>
+            )}
           </div>
           <div className={styles.close_button}>
             <svg
