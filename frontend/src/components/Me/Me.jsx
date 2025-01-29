@@ -2,6 +2,6 @@ import React from 'react'
 
 export default function Me() {
   return (
-    <div>Me</div>
+    <div>This is the Me component</div>
   )
 }
