@@ -237,3 +237,10 @@
     transform: scale(0.9); /* Smaller size for iPhones */
   }
 }
+
+.modal_footer{
+  margin-top: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
