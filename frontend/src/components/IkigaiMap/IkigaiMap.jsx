@@ -245,11 +245,11 @@ useEffect(() => {
             .split(' ')
             .slice(0, 15) // Limit to 15 words for 3 lines (5 words per line)
             .join(' ') // Combine into a single string
-            .match(/.{1,20}/g) // Split into chunks for wrapping
+            .match(/.{1,15}/g) // Split into chunks for wrapping
             ?.slice(0, 3) // Limit to 3 lines
             .map((line, index) => (
               <tspan
-                x="60.5"
+                x="50"
                 dy={index === 0 ? 0 : 14} // Vertical offset for each line
                 key={index}
               >
@@ -283,11 +283,11 @@ useEffect(() => {
             .split(' ')
             .slice(0, 10) // Limit to 15 words for 3 lines (5 words per line)
             .join(' ') // Combine into a single string
-            .match(/.{1,20}/g) // Split into chunks for wrapping
+            .match(/.{1,15}/g) // Split into chunks for wrapping
             ?.slice(0, 3) // Limit to 3 lines
             .map((line, index) => (
               <tspan
-                x="250.5"
+                x="260.5"
                 dy={index === 0 ? 0 : 14} // Vertical offset for each line
                 key={index}
               >
