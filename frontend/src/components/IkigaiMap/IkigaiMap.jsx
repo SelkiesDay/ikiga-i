@@ -402,11 +402,10 @@ useEffect(() => {
       <div className={styles.modal}>
         <h2>{modal}</h2>
         <div>
-          {/* Render Questions */}
            {/* Render Questions Dynamically */}
-  {Object.keys(questions[modal]).map((subsection, index) => (
-    subsection !== 'conclusion' && (
-      <div key={index}>
+        {Object.keys(questions[modal]).map((subsection, index) => (
+          subsection !== 'conclusion' && (
+        <div key={index}>
         {/* Render the dynamic label (e.g., Mission, Passion, etc.) */}
         <span className={styles.dynamicLabel}>
           {subsection.charAt(0).toUpperCase() + subsection.slice(1)}:
@@ -417,18 +416,15 @@ useEffect(() => {
           onChange={(e) => handleText(modal, subsection, e.target.value)}
           value={circleInput[modal][subsection]}
         />
-      </div>
-    )
-  ))}
+      </div>)))}
           {/* Conclusion */}
           <span className={styles.dynamicLabel}>Conclusion:</span>
-    <label>{questions[modal].conclusion}</label> <br />
-    <input
-      type="text"
-      onChange={(e) => handleConclusion(modal, e.target.value)}
-      value={circleInput[modal].conclusion}
-    />
-        </div>
+            <label>{questions[modal].conclusion}</label> <br />
+            <input
+              type="text"
+              onChange={(e) => handleConclusion(modal, e.target.value)}
+              value={circleInput[modal].conclusion}/>
+    </div>
         <div className={styles.modal_footer}>
         <button
               className={styles.switch_button}
@@ -442,21 +438,11 @@ useEffect(() => {
                 const currentIndex = sections.indexOf(modal);
                 const nextIndex = (currentIndex + 1) % sections.length;
                 setModal(sections[nextIndex]);
-              }}
-            >
+              }}>
               Switch Circle
               </button>
             {areAllConclusionsFilled && modal === 'What you are good at' && (
-              <button
-                className={styles.complete_button}
-                onClick={() => {
-                  closeModal();
-                }}
-              >
-                Complete
-              </button>
-            )}
-            
+              <button className={styles.complete_button} onClick={() => {closeModal();}}>Complete</button>)}
           </div>
         <div className={styles.close_button}>
           <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">

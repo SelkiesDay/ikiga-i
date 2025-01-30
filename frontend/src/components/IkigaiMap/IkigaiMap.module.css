@@ -35,21 +35,6 @@
   
 }
 
-@keyframes branchShrink {
-  0% {
-    transform: scale(1.5); /* Start larger */
-    opacity: 0;
-  }
-  100% {
-    transform: scale(1); /* Shrink to normal */
-    opacity: 1;
-  }
-}
-
-.left_branch svg,
-.right_branch svg {
-  animation: branchShrink 2s ease-out forwards;
-}
 
 .title h1  {
     margin-top: 70px; 
@@ -57,6 +42,7 @@
     color: rgb(94, 94, 94);
     font-size: 30px ;
     font-weight: 600;
+    z-index: 2;
 }
 
 
@@ -216,44 +202,38 @@
 }
 
 
-@media (min-width:480px)  { 
-  .left_branch{
-    /* max-width: 292;
-    max-height: 170; */
-    position: absolute;
-    top: 20px;
-    left: 0px ;
-    
-   }
- }
-
- @media (max-width: 1281px) { 
-  .left_branch{
-    max-width: 292;
-    max-height: 170;
-    position: absolute;
-    top: 50px;
-    left: 0px ;
-    
-   }
-   
-   .right_branch{
-    /* min-width: 283;
-    min-height: 142; */
-     position: absolute;
-     bottom: 70px;
-     right: 0px ;
-     
-   }
-
-   @keyframes branchShrink {
-    0% {
-      transform: scale(1.5); /* Start larger */
-      opacity: 0;
-    }
-    100% {
-      transform: scale(1); /* Shrink to normal */
-      opacity: 1;
-    }
+@keyframes branchShrink {
+  0% {
+    transform: scale(1.5); /* Start larger */
+    opacity: 0;
   }
- } 
+  100% {
+    transform: scale(1); /* Shrink to normal */
+    opacity: 1;
+  }
+}
+
+/* Default styles (for laptops/desktops) */
+.left_branch svg,
+.right_branch svg {
+  animation: branchShrink 2s ease-out forwards;
+  transform: scale(1.2); /* Bigger size on larger screens */
+}
+
+/* Responsive adjustments for tablets & phones */
+@media (max-width: 1024px) { 
+  /* For tablets */
+  .left_branch svg,
+  .right_branch svg {
+    transform: scale(1.1); /* Slightly smaller */
+    z-index: ;
+  }
+}
+
+@media (max-width: 768px) { 
+  /* For mobile phones */
+  .left_branch svg,
+  .right_branch svg {
+    transform: scale(0.9); /* Smaller size for iPhones */
+  }
+}
