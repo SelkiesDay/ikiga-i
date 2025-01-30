@@ -197,7 +197,7 @@ useEffect(() => {
             {circleInput['What you can be paid for'].conclusion && (
               <text
                 x="155.5"
-                y="230" // Adjusted for better alignment
+                y="260" // Adjusted for better alignment
                 textAnchor="middle"
                 fontSize="12"
                 fontWeight="normal"
@@ -235,9 +235,9 @@ useEffect(() => {
           {circleInput['What you are good at'].conclusion && (
             <text
               x="30.5"
-              y="180" // Adjusted for better alignment
+              y="155" // Adjusted for better alignment
               textAnchor="middle"
-              fontSize="12"
+              fontSize="11"
               fontWeight="normal"
               fill="black"
             >
@@ -273,9 +273,9 @@ useEffect(() => {
           {circleInput['What the world needs'].conclusion && (
             <text
               x="282.5"
-              y="180" // Adjusted for better alignment
+              y="155" // Adjusted for better alignment
               textAnchor="middle"
-              fontSize="12"
+              fontSize="11"
               fontWeight="normal"
               fill="black"
             >
@@ -468,4 +468,3 @@ useEffect(() => {
       </div>
       );
       }
-
