@@ -2,7 +2,7 @@ import pool from '../config/database.js';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
-const login = async (req, res) => {
+const userLogin = async (req, res) => {
     const { email, password } = req.body;
     if (!email || !password) {
         return res.status(400).json({ error: 'Invalid request' });
@@ -20,7 +20,7 @@ const login = async (req, res) => {
         }
 
         const payload = {
-            id_user: user[0].id,
+            user_id: user[0].id,
             email: user[0].email,
             first_name: user[0].first_name,
             last_name: user[0].last_name,
@@ -31,10 +31,12 @@ const login = async (req, res) => {
         const token = jwt.sign(payload, secretKey, { expiresIn: '12h' });
 
         return res.send({ message: 'Success', token });
-    } catch (err) {
+        
+    }
+    catch (err) {
         console.log(err);
         return res.status(500).json({ error: 'Internal server error' });
     }
 };
 
-export default login;
+export default userLogin;

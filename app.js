@@ -1,6 +1,7 @@
 import 'dotenv/config';
 import express from 'express';
 import reglogRouter from './routes/regLogRouter.js';
+import userRouter from './routes/userRouter.js';
 import auth from './controllers/auth.js';
 import cors from 'cors';
 import pool from './config/database.js';
@@ -8,7 +9,7 @@ import pool from './config/database.js';
 const app = express();
 
 const corsOptions = {
-    origin: '*'
+    origin: 'http://localhost:5173'
 };
 
 app.use(cors(corsOptions));
@@ -18,12 +19,16 @@ app.use(express.json());
 app.use('/api', reglogRouter);
 
 // User navigation on the app
-// app.use(auth);
-// app.use('/api/user', userRouter);
+app.use(auth);
+
+app.use('/api/user', userRouter);
 
 const server = app.listen(3000, () => {
     console.log('Server is running on port 3000');
 });
+
+
+
 
 async function shutdown() {
     console.log('Gracefully shutting down...');
