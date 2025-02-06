@@ -2,7 +2,7 @@ import pool from '../config/database.js';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
-const register = async (req, res) => {
+const userRegister = async (req, res) => {
     const { first_name, last_name, dob, email, password } = req.body;
 
     if (!first_name || !last_name || !dob || !email || !password) {
@@ -15,7 +15,7 @@ const register = async (req, res) => {
 
         const [user] = await pool.query('SELECT * FROM users WHERE email = ?', [email]);
         const payload = {
-            id_user: user[0].id,
+            user_id: user[0].id,
             email: user[0].email,
             first_name: user[0].first_name,
             last_name: user[0].last_name,
@@ -32,4 +32,4 @@ const register = async (req, res) => {
     }
 };
 
-export default register;
+export default userRegister;
