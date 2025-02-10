@@ -14,6 +14,7 @@ const userRegister = async (req, res) => {
         await pool.query('INSERT INTO users (first_name, last_name, dob, email, password) VALUES (?, ?, ?, ?, ?)', [first_name, last_name, dob, email, hashedPassword]);
 
         const [user] = await pool.query('SELECT * FROM users WHERE email = ?', [email]);
+        console.log(user);
         const payload = {
             user_id: user[0].id,
             email: user[0].email,
