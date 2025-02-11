@@ -10,6 +10,7 @@ const userLogin = async (req, res) => {
 
     try {
         const [user] = await pool.query('SELECT id, email, first_name, last_name, password FROM users WHERE email = ?', [email]);
+        console.log(user);
         if (user.length === 0) {
             return res.status(404).json({ error: 'User not found' });
         }
