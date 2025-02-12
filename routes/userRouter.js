@@ -6,7 +6,7 @@ import checkUserOwnership from '../controllers/checkUserOwnership.js';
 
 const router = express.Router();
 
-router.get('/:user_ID', checkUserOwnership, getCircleValues);
+router.get('/:user_ID/', checkUserOwnership, getCircleValues);
 router.post('/:user_ID', checkUserOwnership, setCircleValues); 
 
 export default router;
