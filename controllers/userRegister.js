@@ -9,7 +9,15 @@ const userRegister = async (req, res) => {
         return res.status(400).json({ error: 'First name, last name, date of birth, email, and password are required.' });
     }
 
+    
+
     try {
+
+        const [existingUser] = await pool.query('SELECT * FROM users WHERE email = ?', [email]);
+        if (existingUser.length) {
+            return res.status(400).json({ error: 'User with this email already exists' });
+        }
+        
         const hashedPassword = bcrypt.hashSync(password, 10);
         await pool.query('INSERT INTO users (first_name, last_name, dob, email, password) VALUES (?, ?, ?, ?, ?)', [first_name, last_name, dob, email, hashedPassword]);
 
