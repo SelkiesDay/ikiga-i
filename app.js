@@ -9,7 +9,7 @@ import pool from './config/database.js';
 const app = express();
 
 const corsOptions = {
-    origin: 'http://localhost:5173'
+    origin: '*'
 };
 
 app.use(cors(corsOptions));
